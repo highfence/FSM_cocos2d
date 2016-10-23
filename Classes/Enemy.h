@@ -12,8 +12,14 @@ public :
 	virtual bool      init();
 	virtual void      update(float dt) override;
 
+	/* State */
 	template<typename T_STATE>
 	void              changeState();
+
+	EnemyState*       getState();
+	void              setState(EnemyState*);
+
+	/* Functions */
 	Vec2			  getPosition();
 	void			  setInteval(Vec2);
 	float			  getDistance();
@@ -22,8 +28,6 @@ public :
 	float             getOriginDistance();
 	Vec2              getOrigin();
 	Vec2			  getOriginUnitVec();
-	EnemyState*       getState();
-	void              setState(EnemyState*);
 
 
 private :

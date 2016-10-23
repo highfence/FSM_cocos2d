@@ -4,6 +4,7 @@
 #include "math.h" // for sqrt
 
 const char ENEMY_RESOURCE[] = "enemy.png";
+const char CIRCLE_RESOURCE[] = "pixel500circle.png";
 const float INIT_WIDTH = 0.8f;
 const float INIT_HEIGHT = 0.8f;
 const int PIXEL_PER_SEC = 200;
@@ -39,6 +40,7 @@ Vec2 Enemy::getPosition()
 	Vec2 position = Vec2(m_pHead->getPosition().x, m_pHead->getPosition().y);
 	return position;
 }
+
 
 // 클래스 밖에서 Player와의 거리를 알려주기 위하여 사용하는 set함수. 
 void Enemy::setInteval(Vec2 interval)
