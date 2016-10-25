@@ -4,7 +4,6 @@
 #include "math.h" // for sqrt
 
 const char ENEMY_RESOURCE[] = "enemy.png";
-const char CIRCLE_RESOURCE[] = "pixel500circle.png";
 const float INIT_WIDTH = 0.8f;
 const float INIT_HEIGHT = 0.8f;
 const int PIXEL_PER_SEC = 200;
@@ -43,7 +42,7 @@ Vec2 Enemy::getPosition()
 
 
 // 클래스 밖에서 Player와의 거리를 알려주기 위하여 사용하는 set함수. 
-void Enemy::setInteval(Vec2 interval)
+void Enemy::setInterval(Vec2 interval)
 {
 	float x = interval.x;
 	float y = interval.y;
@@ -68,16 +67,16 @@ Vec2 Enemy::getUnitVec()
 }
 
 // 원래 있던 자리까지의 유닛벡터를 반환하는 함수.
-Vec2 Enemy::getOriginUnitVec()
+Vec2 Enemy::getUnitVecToOrigin()
 {
-	float originDistance = getOriginDistance();
-	Vec2 origin = getOrigin();
+	float distanceFromOrigin = getDistanceFromOrigin();
+	Vec2 origin = getOriginPoint();
 
 	float x = origin.x - m_pHead->getPosition().x;
 	float y = origin.y - m_pHead->getPosition().y;
 
-	Vec2 originUnitVec(x / originDistance, y / originDistance);
-	return originUnitVec;
+	Vec2 unitVecToOrigin(x / distanceFromOrigin, y / distanceFromOrigin);
+	return unitVecToOrigin;
 }
 
 // 유닛벡터와 dt를 받아 움직이게 하는 함수.
@@ -93,9 +92,9 @@ void Enemy::move(Vec2 unitVec, float dt)
 }
 
 // 원래 위치로부터 얼마나 떨어져 있는지를 반환하는 함수.
-float Enemy::getOriginDistance()
+float Enemy::getDistanceFromOrigin()
 {
-	float originDistance;
+	float distanceFromOrigin;
 	
 	float currentX = m_pHead->getPosition().x;
 	float currentY = m_pHead->getPosition().y;
@@ -103,13 +102,13 @@ float Enemy::getOriginDistance()
 	float x = m_Origin.x - currentX;
 	float y = m_Origin.y - currentY;
 
-	originDistance = abs(sqrt(x * x + y * y));
+	distanceFromOrigin = abs(sqrt(x * x + y * y));
 
-	return originDistance;
+	return distanceFromOrigin;
 }
 
 // 원점을 반환하는 함수.
-Vec2 Enemy::getOrigin()
+Vec2 Enemy::getOriginPoint()
 {
 	return m_Origin;
 }

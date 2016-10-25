@@ -5,9 +5,5 @@
 #include "cocos2d.h"
 #pragma warning(pop)
 
-#ifdef _DEBUG
-#define _DEBUG_LABEL 1
-#endif
-
 USING_NS_CC;
 

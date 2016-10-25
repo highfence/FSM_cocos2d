@@ -3,7 +3,6 @@
 #include "EnemyState_Search.h"
 #include "EnemyState_Approach.h"
 
-const float SEARCHING_RANGE = 400.f;
 
 void EnemyState_Search::startState(Enemy* enemy)
 {
@@ -14,7 +13,7 @@ void EnemyState_Search::runState(Enemy* enemy, float dt)
 {
 	float distance = enemy->getDistance();
 
-	if ( distance < SEARCHING_RANGE)
+	if ( isPlayerInSearchRange(enemy, distance) )
 	{
 		enemy->changeState<EnemyState_Approach>();
 	}
@@ -23,4 +22,15 @@ void EnemyState_Search::runState(Enemy* enemy, float dt)
 void EnemyState_Search::endState(Enemy* enemy)
 {
 	CCLOG("end_Searching!");
+}
+
+// 플레이어가 enemy의 SEARCHING_RANGE안에 있다면 true를 반환하는 함수.
+bool EnemyState_Search::isPlayerInSearchRange(Enemy* enemy, float distance)
+{
+	if (distance < enemy->SEARCHING_RANGE)
+	{
+		return true;
+	}
+
+	return false;
 }

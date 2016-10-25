@@ -21,14 +21,18 @@ public :
 
 	/* Functions */
 	Vec2			  getPosition();
-	void			  setInteval(Vec2);
+	void			  setInterval(Vec2);
 	float			  getDistance();
 	Vec2              getUnitVec();
 	void              move(Vec2, float);
-	float             getOriginDistance();
-	Vec2              getOrigin();
-	Vec2			  getOriginUnitVec();
+	float             getDistanceFromOrigin();
+	Vec2              getOriginPoint();
+	Vec2			  getUnitVecToOrigin();
 
+	/* Const values */
+	const float		  SEARCHING_RANGE = 400.f;
+	const float       RETURN_RANGE = 500.f;
+	const float		  ORIGIN_RANGE = 50.f;
 
 private :
 	Sprite*           m_pHead;

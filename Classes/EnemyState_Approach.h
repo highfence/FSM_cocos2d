@@ -6,12 +6,15 @@ class EnemyState_Approach : public EnemyState
 {
 public :
 	CREATE_FUNC(EnemyState_Approach);
-	bool init() override
+	bool		init() override
 	{
 		return true;
 	}
-	void startState(Enemy* enemy) override;
-	void runState(Enemy* enemy, float dt) override;
-	void endState(Enemy* enemy) override;
+
+	void		startState(Enemy* enemy) override;
+	void		runState(Enemy* enemy, float dt) override;
+	void		endState(Enemy* enemy) override;
+
+	bool		isEnemyOutOfOriginRange(Enemy*, float);
 };
 

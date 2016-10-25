@@ -4,7 +4,6 @@
 #include "EnemyState_Search.h"
 #include "EnemyState_Return.h"
 
-const float RETURN_RANGE = 500.f;
 
 void EnemyState_Approach::startState(Enemy* enemy)
 {
@@ -15,16 +14,16 @@ void EnemyState_Approach::startState(Enemy* enemy)
 // 500픽셀이 넘어가면 다시 제자리로 돌아가도록 state를 변경.
 void EnemyState_Approach::runState(Enemy* enemy, float dt)
 {
-	float originDistance = enemy->getOriginDistance();
+	float distanceFromOrigin = enemy->getDistanceFromOrigin();
 	
-	if (originDistance < RETURN_RANGE)
+	if (isEnemyOutOfOriginRange(enemy, distanceFromOrigin))
 	{
-		auto unitVec = enemy->getUnitVec();
-		enemy->move(unitVec, dt);
+		enemy->changeState<EnemyState_Return>();
 	}
 	else
 	{
-		enemy->changeState<EnemyState_Return>();
+		auto unitVec = enemy->getUnitVec();
+		enemy->move(unitVec, dt);
 	}
 
 }
@@ -32,4 +31,17 @@ void EnemyState_Approach::runState(Enemy* enemy, float dt)
 void EnemyState_Approach::endState(Enemy* enemy)
 {
 	CCLOG("end_Approach!");
+}
+
+// enemy가 내부의 return_range를 벗어났는지 알려주는 함수.
+bool EnemyState_Approach::isEnemyOutOfOriginRange(Enemy *enemy, float distanceFromOrigin)
+{
+	if (distanceFromOrigin < enemy->RETURN_RANGE)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }

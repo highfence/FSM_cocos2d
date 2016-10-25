@@ -6,11 +6,15 @@ class EnemyState_Search : public EnemyState
 {
 public :
 	CREATE_FUNC(EnemyState_Search);
-	bool init() override
+	bool		init() override
 	{
 		return true;
 	}
-	void startState(Enemy* enemy) override;
-	void runState(Enemy* enemy, float dt) override;
-	void endState(Enemy* enemy) override;
+
+	void		startState(Enemy* enemy) override;
+	void		runState(Enemy* enemy, float dt) override;
+	void		endState(Enemy* enemy) override;
+
+	bool		isPlayerInSearchRange(Enemy*, float);
+
 };

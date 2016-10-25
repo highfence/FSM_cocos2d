@@ -24,14 +24,17 @@ bool Player::init()
 		return false;
 	}
 
+	// 초기 방향 설정
 	m_Direction[_x] = NONE;
 	m_Direction[_y] = NONE;
 
+	// 초기 스프라이트 설정.
 	m_Hp = MAX_HP;
 	m_pHead = Sprite::create(PLAYER_RESOURCE);
 	m_pHead->setPosition(Vec2(visibleSize.width * INIT_WIDTH, visibleSize.height * INIT_HEIGHT));
 	addChild(m_pHead);
 
+	// 키보드 입력을 위한 keylistener 설정.
 	auto keylistener = EventListenerKeyboard::create();
 	keylistener->onKeyPressed = CC_CALLBACK_2(Player::onKeyPressed, this);
 	keylistener->onKeyReleased = CC_CALLBACK_2(Player::onKeyReleased, this);

@@ -43,13 +43,16 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
+	// 플레이어 생성.
 	player = Player::create();
 	addChild(player);
 
+	// 적 생성. 플레이어의 위치 정보를 안에 세팅해줌.
 	enemy = Enemy::create();
-	enemy->setInteval(calculateInterval());
+	enemy->setInterval(calculateInterval());
 	addChild(enemy);
 
+	// 업데이트 
 	scheduleUpdate();
     return true;
 }
@@ -73,7 +76,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float dt)
 {
-	enemy->setInteval(calculateInterval());
+	enemy->setInterval(calculateInterval());
 	player->move(dt);
 }
 

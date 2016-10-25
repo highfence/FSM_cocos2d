@@ -3,7 +3,7 @@
 #include "EnemyState_Return.h"
 #include "EnemyState_Search.h"
 
-const float ORIGIN_RANGE = 50.f;
+
 
 void EnemyState_Return::startState(Enemy* enemy)
 {
@@ -13,20 +13,32 @@ void EnemyState_Return::startState(Enemy* enemy)
 // 원점으로 돌아간다. 이후 다시 서칭으로 바꾸어준다.
 void EnemyState_Return::runState(Enemy* enemy, float dt)
 {
-	float originDistance = enemy->getOriginDistance();
+	float distanceFromOrigin = enemy->getDistanceFromOrigin();
 
-	if (originDistance > ORIGIN_RANGE)
+	if (isReturnComplete(enemy, distanceFromOrigin))
 	{
-		auto originUnitVec = enemy->getOriginUnitVec();
-		enemy->move(originUnitVec, dt);
+		enemy->changeState<EnemyState_Search>();
 	}
 	else
 	{
-		enemy->changeState<EnemyState_Search>();
+		auto originUnitVec = enemy->getUnitVecToOrigin();
+		enemy->move(originUnitVec, dt);
 	}
 }
 
 void EnemyState_Return::endState(Enemy* enemy)
 {
 	CCLOG("end_Return!");
+}
+
+bool EnemyState_Return::isReturnComplete(Enemy *enemy, float distanceFromOrigin)
+{
+	if (distanceFromOrigin < enemy->ORIGIN_RANGE)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
