@@ -28,6 +28,8 @@ public :
 	float             getDistanceFromOrigin();
 	Vec2              getOriginPoint();
 	Vec2			  getUnitVecToOrigin();
+	void			  setIsAttacked(bool);
+	bool			  getIsAttacked();
 
 	/* Const values */
 	const float		  SEARCHING_RANGE = 400.f;
@@ -41,6 +43,7 @@ private :
 	Vec2	          m_Origin;
 	Vec2			  m_Interval;
 	float			  m_Distance;
+	bool			  m_IsAttacked;
 
 };
 

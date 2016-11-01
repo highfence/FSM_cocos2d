@@ -20,6 +20,7 @@ bool Enemy::init()
 	m_Origin = Vec2(visibleSize_E.width * INIT_WIDTH, visibleSize_E.height * INIT_HEIGHT);
 	m_pHead = Sprite::create(ENEMY_RESOURCE);
 	m_pHead->setPosition(Vec2(visibleSize_E.width * INIT_WIDTH, visibleSize_E.height * INIT_HEIGHT));
+
 	addChild(m_pHead);
 
 	changeState<EnemyState_Search>();
@@ -77,6 +78,19 @@ Vec2 Enemy::getUnitVecToOrigin()
 
 	Vec2 unitVecToOrigin(x / distanceFromOrigin, y / distanceFromOrigin);
 	return unitVecToOrigin;
+}
+
+// 공격을 받는지 확인해주는 함수.
+void Enemy::setIsAttacked(bool IsAttacked)
+{
+	m_IsAttacked = IsAttacked;
+	return;
+}
+
+// IsAttacked를 반환하는 함수.
+bool Enemy::getIsAttacked()
+{
+	return m_IsAttacked;
 }
 
 // 유닛벡터와 dt를 받아 움직이게 하는 함수.
